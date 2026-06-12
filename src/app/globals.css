@@ -26,6 +26,7 @@ h4 { color: #98BE98 !important; }
 
 /* Footer: títulos de coluna → verde escuro (sobrescreve regra h3 acima) */
 footer h3 { color: #1E6F30 !important; }
+.h3-dark { color: #1E6F30 !important; }
 
 /* Textos de corpo → preto (fundo claro) */
 p  { color: #000000 !important; }

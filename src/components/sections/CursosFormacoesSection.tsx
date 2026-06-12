@@ -132,8 +132,8 @@ export default function CursosFormacoesSection() {
 
         {/* Cursos Diversos */}
         <div className="mb-14">
-          <h3 className="font-display text-xl tracking-wide text-[#1E6F30] mb-6 pb-2 border-b-2 border-[#98BE98]">
-            CURSOS DIVERSOS <span className="text-[#6CC24A] text-base ml-2">({cursosFormacoesDiversos.length} cursos)</span>
+          <h3 className="h3-dark font-display text-xl tracking-wide mb-6 pb-2 border-b-2 border-[#98BE98]">
+            CURSOS DIVERSOS <span className="text-base ml-2" style={{ color: '#6CC24A' }}>({cursosFormacoesDiversos.length} cursos)</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {cursosFormacoesDiversos.map((c) => <CursoCard key={c.nome} curso={c} />)}
@@ -142,8 +142,8 @@ export default function CursosFormacoesSection() {
 
         {/* Cursos de Massagem */}
         <div>
-          <h3 className="font-display text-xl tracking-wide text-[#1E6F30] mb-6 pb-2 border-b-2 border-[#98BE98]">
-            CURSOS DE MASSAGENS <span className="text-[#6CC24A] text-base ml-2">({cursosMassagem.length} cursos)</span>
+          <h3 className="h3-dark font-display text-xl tracking-wide mb-6 pb-2 border-b-2 border-[#98BE98]">
+            CURSOS DE MASSAGENS <span className="text-base ml-2" style={{ color: '#6CC24A' }}>({cursosMassagem.length} cursos)</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {cursosMassagem.map((c) => <CursoCard key={c.nome} curso={c} />)}
