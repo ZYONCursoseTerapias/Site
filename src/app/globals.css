@@ -1,32 +1,314 @@
 @import "tailwindcss";
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: #0d0918;
-  color: #fff;
+  background: #f5f3f0;
+  color: #000000;
+  font-family: var(--font-quicksand), 'Quicksand', sans-serif;
   min-height: 100vh;
+  line-height: 1.8;
 }
 
-/* Starfield background utility */
-.bg-stars {
+/* ── Tipografia ── */
+.font-display { font-family: var(--font-yanone), 'Yanone Kaffeesatz', sans-serif; letter-spacing: 0.12em; }
+.font-body    { font-family: var(--font-quicksand), 'Quicksand', sans-serif; }
+
+/* ── REGRAS DE COR ABSOLUTAS ── */
+
+/* Títulos principais → verde escuro */
+h1, h2 { color: #1E6F30 !important; }
+
+/* Subtítulos/rótulos de seção → verde suave */
+h3 { color: #98BE98 !important; }
+h4 { color: #98BE98 !important; }
+
+/* Footer: títulos de coluna → verde escuro (sobrescreve regra h3 acima) */
+footer h3 { color: #1E6F30 !important; }
+
+/* Textos de corpo → preto (fundo claro) */
+p  { color: #000000 !important; }
+li { color: #000000 !important; }
+
+/* Rótulos de seção (ex: "ATENDIMENTOS TERAPÊUTICOS") → verde suave */
+.label-section { color: #98BE98 !important; font-size: 11px; letter-spacing: 0.3em; }
+
+/* Sobre fundo verde → branco */
+.section-green p,
+.section-green li { color: #ffffff !important; }
+
+/* Footer — textos preto, títulos de coluna verde escuro */
+footer p,
+footer li,
+footer span,
+footer address { color: #000000 !important; }
+footer h3 { color: #1E6F30 !important; }
+
+/* Classe explícita para links do footer — inherit força pegar preto do pai */
+.footer-link { color: inherit !important; text-decoration: none; }
+.footer-copyright { color: #1E6F30 !important; }
+.footer-link:hover { opacity: 0.7; }
+
+/* Links gerais → preto */
+a { color: #000000 !important; }
+
+/* Navbar → verde escuro */
+header a { color: #1E6F30 !important; }
+
+/* Exceções de cor para links especiais */
+.cta-primary, .cta-primary * { color: #ffffff !important; }
+.cta-outline { color: #1E6F30 !important; }
+.cta-outline:hover { color: #ffffff !important; }
+.cta-wa-link { color: #6CC24A !important; }
+.cta-wa-link:hover { color: #1E6F30 !important; }
+
+/* Escala tipográfica */
+h1 { font-size: 32px !important; line-height: 1.35 !important; }
+h2 { font-size: 28px !important; line-height: 1.4  !important; }
+h3 { font-size: 18px !important; line-height: 1.5  !important; }
+h4 { font-size: 16px !important; line-height: 1.5  !important; }
+p  { font-size: 15px; line-height: 1.8; }
+
+/* ── Paleta ── */
+:root {
+  --green-light:  #6CC24A;
+  --green-dark:   #1E6F30;
+  --beige:        #E8A645;
+  --green-soft:   #98BE98;
+  --cream:        #f7f9f4;
+  --stone:        #f0ede8;
+}
+
+/* ── Backgrounds terapêuticos ── */
+
+/* Bambu lateral — muito sutil */
+.bg-bamboo {
   background-image:
-    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 60% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 80% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 50% 90%, rgba(255,255,255,0.5) 0%, transparent 100%);
+    url("data:image/svg+xml,%3Csvg width='60' height='180' viewBox='0 0 60 180' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='27' y='0' width='5' height='178' rx='2.5' fill='%2398BE98' opacity='0.12'/%3E%3Cellipse cx='29.5' cy='40' rx='9' ry='4' fill='%2398BE98' opacity='0.10'/%3E%3Cellipse cx='29.5' cy='90' rx='9' ry='4' fill='%2398BE98' opacity='0.10'/%3E%3Cellipse cx='29.5' cy='140' rx='9' ry='4' fill='%2398BE98' opacity='0.10'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-position: right 0 top 0;
+  background-size: 60px 180px;
 }
 
-/* Glassmorphism card */
-.glass {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+/* Pedras — textura suave de fundo */
+.bg-stone-texture {
+  background-image:
+    radial-gradient(ellipse 80px 50px at 15% 25%, rgba(152,190,152,0.08) 0%, transparent 100%),
+    radial-gradient(ellipse 60px 40px at 80% 70%, rgba(232,166,69,0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 100px 60px at 50% 90%, rgba(152,190,152,0.06) 0%, transparent 100%);
 }
+
+/* Logo de Sandrä como padrão repetitivo */
+.bg-yinyang {
+  background-image: url('/assets/logotipo.svg');
+  background-repeat: repeat;
+  background-size: 110px 110px;
+  opacity: 0.07;
+}
+
+/* Logo padrão wallpaper (aplicado via pseudo-elemento no wrapper) */
+.logo-pattern-wrap { position: relative; }
+.logo-pattern-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/logotipo.svg');
+  background-repeat: repeat;
+  background-size: 110px 110px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+.logo-pattern-wrap > * { position: relative; z-index: 1; }
+
+/* Logo grande — Hero (centralizado, muito suave) */
+.logo-bg-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/logotipo.svg');
+  background-repeat: no-repeat;
+  background-position: 70% center;
+  background-size: 55%;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Logo médio — Sobre (lado direito) */
+.logo-bg-sobre::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/logotipo.svg');
+  background-repeat: no-repeat;
+  background-position: right -40px center;
+  background-size: 380px 380px;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Logo pequeno — Footer */
+.logo-bg-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/logotipo.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 260px 260px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  filter: brightness(4);
+}
+
+/* Divisor com logo no centro */
+.divider-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+.divider-logo::before,
+.divider-logo::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #98BE98 40%, transparent);
+  opacity: 0.6;
+}
+.divider-logo-icon {
+  width: 28px;
+  height: 28px;
+  opacity: 0.35;
+  flex-shrink: 0;
+}
+
+/* ── Seções alternadas ── */
+.section-cream  { background: #F5F3F0; }
+.section-stone  { background: #EDE9E3; }
+.section-white  { background: #faf9f7; }
+.section-green  { background: #1E6F30; }
+
+/* ── Cards terapêuticos — accordion style ── */
+.card-therapeutic {
+  background: #faf9f7;
+  border: 1px solid #c8dfc8;
+  border-radius: 1.25rem;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  overflow: hidden;
+}
+.card-therapeutic:hover {
+  box-shadow: 0 6px 32px rgba(30,111,48,0.10);
+  border-color: #6CC24A;
+}
+.card-therapeutic-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.75rem;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.card-therapeutic-body {
+  padding: 0 1.75rem 1.75rem;
+  border-top: 1px solid #edf5ed;
+}
+
+/* ── Glassmorphism (app section) ── */
+.glass {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ── Divider elegante ── */
+.divider-elegant {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #98BE98 30%, #6CC24A 50%, #98BE98 70%, transparent);
+  margin: 0;
+  opacity: 0.6;
+}
+
+/* ── Badge presencial ── */
+.badge-presencial {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #f0faf0;
+  color: #1E6F30;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid #c8dfc8;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* ── CTAs suaves ── */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1E6F30;
+  color: #fff;
+  padding: 0.85rem 2.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.25s, transform 0.2s;
+  text-decoration: none;
+}
+.cta-primary:hover { background: #6CC24A; transform: translateY(-1px); }
+
+.cta-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1.5px solid #1E6F30;
+  color: #1E6F30;
+  padding: 0.85rem 2.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.25s;
+  text-decoration: none;
+}
+.cta-outline:hover { background: #1E6F30; color: #fff; }
+
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #1E6F30;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: color 0.2s;
+  border-bottom: 1px solid transparent;
+}
+.cta-ghost:hover { color: #6CC24A; border-bottom-color: #6CC24A; }
+
+/* ── CTA WhatsApp discreto ── */
+.cta-wa-link {
+  color: #6CC24A;
+  border-bottom: 1px solid rgba(108,194,74,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.cta-wa-link:hover { color: #1E6F30; }
+
+/* ── Fix dark-app pages (cadastro/login/dashboard) ── */
+body.app-dark { background: #0d0918; color: #fff; }

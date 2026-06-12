@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { comparePasswords, signToken } from '@/lib/auth';
+import { isValidEmail } from '@/lib/validation';
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,10 +11,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'E-mail e senha são obrigatórios' }, { status: 400 });
     }
 
+    if (!isValidEmail(email)) {
+      return NextResponse.json({ message: 'E-mail inválido', field: 'email' }, { status: 400 });
+    }
+
     const result = await pool.query(
-      `SELECT id, full_name, email, password_hash, whatsapp, birth_date, birth_time, birth_place, whatsapp_notifications, created_at
+      `SELECT id, full_name, email, password_hash, whatsapp, birth_date, birth_time, birth_location, created_at
        FROM users WHERE email = $1`,
-      [email]
+      [email.toLowerCase().trim()]
     );
 
     if (result.rows.length === 0) {

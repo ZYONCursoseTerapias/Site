@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import TimeInput from '@/components/TimeInput';
+import CityAutocomplete from '@/components/CityAutocomplete';
+import { normalizeWhatsApp, isValidEmail, isValidTime } from '@/lib/validation';
 
 interface FormData {
   full_name: string;
@@ -13,13 +16,10 @@ interface FormData {
   whatsapp: string;
   birth_date: string;
   birth_time: string;
-  birth_place: string;
-  whatsapp_notifications: boolean;
+  birth_location: string;
 }
 
-interface FieldErrors {
-  [key: string]: string;
-}
+type FieldErrors = Partial<Record<keyof FormData, string>>;
 
 export default function CadastroPage() {
   const router = useRouter();
@@ -30,29 +30,49 @@ export default function CadastroPage() {
     whatsapp: '',
     birth_date: '',
     birth_time: '',
-    birth_place: '',
-    whatsapp_notifications: false,
+    birth_location: '',
   });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  function set(field: keyof FormData, value: string | boolean) {
+  function set(field: keyof FormData, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: '' }));
+    setErrors((prev) => ({ ...prev, [field]: undefined }));
   }
 
   function validate(): boolean {
     const next: FieldErrors = {};
-    if (!form.full_name.trim()) next.full_name = 'Nome é obrigatório';
-    if (!form.email.trim()) next.email = 'E-mail é obrigatório';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = 'E-mail inválido';
-    if (!form.password) next.password = 'Senha é obrigatória';
-    else if (form.password.length < 8) next.password = 'Mínimo 8 caracteres';
-    if (!form.birth_date) next.birth_date = 'Data de nascimento é obrigatória';
-    if (form.whatsapp && !/^\+55\d{10,11}$/.test(form.whatsapp.replace(/\s/g, ''))) {
-      next.whatsapp = 'Formato: +55 (DDD) 9XXXX-XXXX';
-    }
+
+    if (!form.full_name.trim())
+      next.full_name = 'Nome completo é obrigatório';
+
+    if (!form.email.trim())
+      next.email = 'E-mail é obrigatório';
+    else if (!isValidEmail(form.email))
+      next.email = 'E-mail inválido';
+
+    if (!form.password)
+      next.password = 'Senha é obrigatória';
+    else if (form.password.length < 8)
+      next.password = 'Mínimo 8 caracteres';
+
+    if (!form.whatsapp.trim())
+      next.whatsapp = 'WhatsApp é obrigatório';
+    else if (!normalizeWhatsApp(form.whatsapp))
+      next.whatsapp = 'Formato inválido. Ex: (11) 99999-9999 ou +5511999999999';
+
+    if (!form.birth_date)
+      next.birth_date = 'Data de nascimento é obrigatória';
+
+    if (!form.birth_time)
+      next.birth_time = 'Hora de nascimento é obrigatória';
+    else if (!isValidTime(form.birth_time))
+      next.birth_time = 'Hora inválida. Use HH:MM (ex: 23:55)';
+
+    if (!form.birth_location.trim())
+      next.birth_location = 'Cidade de nascimento é obrigatória';
+
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -64,10 +84,15 @@ export default function CadastroPage() {
     setApiError('');
 
     try {
+      const payload = {
+        ...form,
+        whatsapp: normalizeWhatsApp(form.whatsapp) ?? form.whatsapp,
+      };
+
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
 
@@ -94,7 +119,7 @@ export default function CadastroPage() {
         <div className="text-center mb-8">
           <Link href="/" className="text-purple-300 text-sm hover:text-white transition">← Voltar</Link>
           <h1 className="text-3xl font-bold text-white mt-4 mb-2">Criar sua conta</h1>
-          <p className="text-purple-300 text-sm">Preencha seus dados para acessar sua análise diária</p>
+          <p className="text-purple-300 text-sm">Preencha seus dados para acessar seu Conselho Intuitivo diário</p>
         </div>
 
         <form onSubmit={handleSubmit} className="glass rounded-2xl p-8 space-y-5">
@@ -109,7 +134,7 @@ export default function CadastroPage() {
             autoComplete="name"
           />
 
-          {/* 2. Email */}
+          {/* 2. E-mail */}
           <Input
             label="E-mail *"
             type="email"
@@ -133,12 +158,13 @@ export default function CadastroPage() {
 
           {/* 3. WhatsApp */}
           <Input
-            label="WhatsApp"
+            label="WhatsApp *"
             type="tel"
-            placeholder="+55 11 99999-9999"
+            placeholder="(11) 99999-9999"
             value={form.whatsapp}
             onChange={(e) => set('whatsapp', e.target.value)}
             error={errors.whatsapp}
+            hint="+55 (DDD) número — será normalizado automaticamente"
             autoComplete="tel"
           />
 
@@ -152,39 +178,27 @@ export default function CadastroPage() {
           />
 
           {/* 5. Hora de Nascimento */}
-          <Input
+          <TimeInput
             label="Hora de Nascimento"
-            type="time"
             value={form.birth_time}
-            onChange={(e) => set('birth_time', e.target.value)}
+            onChange={(v) => set('birth_time', v)}
             error={errors.birth_time}
+            required
           />
 
-          {/* 6. Local de Nascimento */}
-          <Input
-            label="Local de Nascimento"
-            type="text"
-            placeholder="Cidade, Estado, País"
-            value={form.birth_place}
-            onChange={(e) => set('birth_place', e.target.value)}
-            error={errors.birth_place}
+          {/* 6. Cidade de Nascimento */}
+          <CityAutocomplete
+            label="Cidade de Nascimento"
+            value={form.birth_location}
+            onChange={(v) => set('birth_location', v)}
+            error={errors.birth_location}
+            required
           />
-
-          {/* 7. Checkbox WhatsApp */}
-          <label className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={form.whatsapp_notifications}
-              onChange={(e) => set('whatsapp_notifications', e.target.checked)}
-              className="mt-1 w-4 h-4 accent-purple-500 cursor-pointer"
-            />
-            <span className="text-sm text-purple-200 leading-relaxed">
-              Aceitar notificações via WhatsApp com análises e mensagens diárias de Sandrä Costa
-            </span>
-          </label>
 
           {apiError && (
-            <p className="text-sm text-red-400 text-center bg-red-500/10 rounded-lg py-2 px-4">{apiError}</p>
+            <p className="text-sm text-red-400 text-center bg-red-500/10 rounded-lg py-2 px-4">
+              {apiError}
+            </p>
           )}
 
           <Button type="submit" loading={loading}>

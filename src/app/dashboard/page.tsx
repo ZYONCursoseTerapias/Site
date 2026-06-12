@@ -1,13 +1,12 @@
 'use client';
 
+// TODO: Substituir com análise diária integrada (PROMPT 2+)
+// Implementar: cálculo energético do dia, leitura de Luz e Sombra,
+// conselho personalizado baseado nos dados de nascimento do usuário.
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-interface User {
-  id: number;
-  full_name: string;
-  email: string;
-}
+import { User } from '@/types';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -51,9 +50,9 @@ export default function DashboardPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { icon: '♈', title: 'Astrologia', status: 'Em breve' },
-            { icon: '✦', title: 'Numerologia', status: 'Em breve' },
-            { icon: '🌙', title: 'Tarot do Dia', status: 'Em breve' },
+            { icon: '✦', title: 'Análise Energética', status: 'Em breve' },
+            { icon: '🌟', title: 'Leitura do Dia', status: 'Em breve' },
+            { icon: '💫', title: 'Conselho Personalizado', status: 'Em breve' },
           ].map((card) => (
             <div
               key={card.title}
@@ -67,7 +66,7 @@ export default function DashboardPage() {
         </div>
 
         <p className="text-center text-purple-500 text-sm mt-12">
-          Análise diária personalizada estará disponível em breve.
+          Sua leitura completa do dia estará disponível em breve.
         </p>
       </div>
     </div>

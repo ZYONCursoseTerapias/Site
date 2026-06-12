@@ -4,7 +4,7 @@ import { withAuth } from '@/lib/middleware';
 
 export const GET = withAuth(async (_req: NextRequest, userId: number) => {
   const result = await pool.query(
-    `SELECT id, full_name, email, whatsapp, birth_date, birth_time, birth_place, whatsapp_notifications, created_at
+    `SELECT id, full_name, email, whatsapp, birth_date, birth_time, birth_location, created_at
      FROM users WHERE id = $1`,
     [userId]
   );

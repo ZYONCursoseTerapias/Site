@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Círculo externo -->
+  <circle cx="100" cy="100" r="90" stroke="#1E6F30" stroke-width="9" fill="white"/>
+
+  <!-- Curva S calligráfica central (yin-yang de Sandrä) -->
+  <!-- Metade superior: curva do lado esquerdo para cima -->
+  <path
+    d="M100 15
+       C60 15, 38 40, 38 65
+       C38 90, 55 100, 78 100
+       C101 100, 120 110, 120 135
+       C120 160, 98 183, 62 188"
+    stroke="#1E6F30"
+    stroke-width="14"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Espiral superior (olho superior) -->
+  <path
+    d="M95 55
+       C88 55, 83 60, 83 67
+       C83 74, 88 79, 95 79
+       C100 79, 104 76, 104 71
+       C104 67, 101 65, 97 65"
+    stroke="#1E6F30"
+    stroke-width="6"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- Ponto do olho superior -->
+  <circle cx="91" cy="71" r="4" fill="#1E6F30"/>
+
+  <!-- Espiral inferior (olho inferior) -->
+  <path
+    d="M108 140
+       C115 140, 120 145, 120 152
+       C120 159, 115 164, 108 164
+       C103 164, 99 161, 99 156
+       C99 152, 102 150, 106 150"
+    stroke="#1E6F30"
+    stroke-width="6"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- Ponto do olho inferior -->
+  <circle cx="112" cy="156" r="4" fill="#1E6F30"/>
+
+  <!-- Traço final da curva S (terminação elegante no lado direito) -->
+  <path
+    d="M62 188
+       C55 190, 150 195, 162 175"
+    stroke="#1E6F30"
+    stroke-width="9"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.7"
+  />
+</svg>
