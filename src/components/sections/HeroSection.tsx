@@ -20,28 +20,28 @@ export default function HeroSection() {
       }} />
 
       <div className="relative z-10 w-full max-w-[600px] mx-auto px-10 text-center py-24">
-        <p className="font-display text-[11px] tracking-[0.32em] mb-8" style={{ color: '#98BE98' }}>
+        <p className="font-display text-[13px] tracking-[0.32em] mb-8" style={{ color: '#98BE98' }}>
           TERAPEUTA HOLÍSTICA DESDE 2001
         </p>
 
-        <h1 className="text-[32px] font-semibold leading-[1.35] mb-6" style={{ color: '#1E6F30' }}>
+        <h1 className="text-[38px] font-semibold leading-[1.35] mb-6" style={{ color: '#1E6F30' }}>
           Um espaço de acolhimento<br />
           <span className="italic font-semibold" style={{ color: '#1E6F30' }}>para sua reconexão interior</span>
         </h1>
 
-        <p className="text-[18px] italic leading-[1.8] mb-10" style={{ color: '#98BE98' }}>
+        <p className="text-[20px] italic leading-[1.8] mb-10" style={{ color: '#98BE98' }}>
           Se você chegou até aqui, algo em você já sabe<br className="hidden sm:block" />
           que é hora de uma mudança.
         </p>
 
-        <p className="text-[16px] leading-[1.8] mb-10" style={{ color: '#4A4A4A' }}>
+        <p className="text-[17px] leading-[1.9] mb-10" style={{ color: '#4A4A4A' }}>
           Transformar desafios em aprendizados, liberar pesos que não são
           mais seus e abrir espaço para uma vida mais leve e verdadeira.
           <br /><br />
           Caminho ao seu lado com escuta, cuidado e propósito.
         </p>
 
-        <p className="text-[14px] leading-[1.8] mb-14" style={{ color: '#888888' }}>
+        <p className="text-[15px] leading-[1.8] mb-14" style={{ color: '#888888' }}>
           Atendimentos somente com horário agendado
         </p>
 
