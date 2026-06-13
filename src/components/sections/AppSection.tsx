@@ -96,7 +96,7 @@ export default function AppSection() {
 
           {/* App Completo */}
           <div className="rounded-2xl p-8" style={{ background: '#ffffff', border: '2px solid #1E6F30' }}>
-            <h3 className="font-bold mb-1" style={{ color: '#1E6F30' }}>Conselho Intuitivo</h3>
+            <h3 className="font-bold mb-1" style={{ color: '#1E6F30' }}>Orientação Intuitiva</h3>
             <p className="font-display text-xs tracking-widest mb-5" style={{ color: '#6CC24A' }}>
               APLICATIVO COMPLETO
             </p>
