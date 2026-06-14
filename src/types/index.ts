@@ -34,3 +34,30 @@ export interface ApiError {
   message: string;
   field?: string;
 }
+
+export interface NatalChart {
+  id: number;
+  user_id: number;
+  lat: number;
+  lng: number;
+  ascendant_longitude: number;
+  ascendant_sign: string;
+  sun_sign: string; sun_house: number; sun_longitude: number;
+  moon_sign: string; moon_house: number; moon_longitude: number;
+  mercury_sign: string; mercury_house: number; mercury_longitude: number;
+  venus_sign: string; venus_house: number; venus_longitude: number;
+  mars_sign: string; mars_house: number; mars_longitude: number;
+  created_at: string;
+}
+
+export interface DailyAspects {
+  id: number;
+  user_id: number;
+  date: string;
+  sun_sign: string; sun_house: number; sun_longitude: number;
+  moon_sign: string; moon_house: number; moon_longitude: number;
+  mercury_sign: string; mercury_house: number; mercury_longitude: number;
+  venus_sign: string; venus_house: number; venus_longitude: number;
+  mars_sign: string; mars_house: number; mars_longitude: number;
+  created_at: string;
+}
