@@ -27,6 +27,16 @@ export default function DashboardPage() {
     router.push('/');
   }
 
+  async function testNatal() {
+    const token = localStorage.getItem('token');
+    const res = await fetch('/api/astrology/calculate-natal', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token },
+    });
+    const data = await res.json();
+    alert(JSON.stringify(data, null, 2));
+  }
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: '#F5F3F0' }}>
@@ -90,6 +100,16 @@ export default function DashboardPage() {
         <p className="text-center text-sm mt-12" style={{ color: '#98BE98' }}>
           Sua leitura completa do dia estará disponível em breve.
         </p>
+
+        <div className="text-center mt-6">
+          <button
+            onClick={testNatal}
+            className="px-4 py-2 rounded-lg text-sm text-white"
+            style={{ background: '#1E6F30' }}
+          >
+            Testar Mapa Natal
+          </button>
+        </div>
       </div>
     </div>
   );
