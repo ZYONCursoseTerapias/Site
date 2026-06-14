@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import TimeInput from '@/components/TimeInput';
-import CityAutocomplete from '@/components/CityAutocomplete';
+
 import { normalizeWhatsApp, isValidEmail, isValidTime } from '@/lib/validation';
 
 interface FormData {
@@ -185,12 +185,15 @@ export default function CadastroPage() {
           />
 
           {/* 6. Cidade de Nascimento */}
-          <CityAutocomplete
-            label="Cidade de Nascimento"
+          <Input
+            label="Cidade de Nascimento *"
+            type="text"
+            placeholder="Ex: Lisboa, Portugal ou São Paulo, SP, Brasil"
             value={form.birth_location}
-            onChange={(v) => set('birth_location', v)}
+            onChange={(e) => set('birth_location', e.target.value)}
             error={errors.birth_location}
-            required
+            hint='Formato: "Cidade, País" ou "Cidade, Estado, País"'
+            autoComplete="off"
           />
 
           {apiError && (
