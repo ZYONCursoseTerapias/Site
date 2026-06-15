@@ -12,8 +12,9 @@ body {
 }
 
 /* ── Tipografia ── */
-.font-display { font-family: var(--font-yanone), 'Yanone Kaffeesatz', sans-serif; letter-spacing: 0.12em; }
-.font-body    { font-family: var(--font-quicksand), 'Quicksand', sans-serif; }
+.font-display  { font-family: var(--font-yanone), 'Yanone Kaffeesatz', sans-serif; letter-spacing: 0.12em; }
+.font-body     { font-family: var(--font-quicksand), 'Quicksand', sans-serif; }
+.font-cursive  { font-family: var(--font-great-vibes), 'Great Vibes', cursive; }
 
 /* ── REGRAS DE COR ABSOLUTAS ── */
 

@@ -42,7 +42,7 @@ export default function SiteNavbar() {
             className="h-[45px] w-[45px] object-contain"
           />
           <div className="flex flex-col leading-tight">
-            <span className="font-display text-base tracking-[0.08em] text-[#1E6F30] font-semibold">Sandrä Costa</span>
+            <span className="font-cursive text-[22px] text-[#1E6F30] leading-tight">Sandrä Costa</span>
             <span className="font-display text-[8px] tracking-[0.22em] text-[#6CC24A]/80">TERAPEUTA HOLÍSTICA</span>
           </div>
         </Link>
